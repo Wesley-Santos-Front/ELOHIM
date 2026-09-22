@@ -27,7 +27,7 @@ export default function Members() {
   const getMembers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/busca", {
+      const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
         credentials: "include"
       });
       
@@ -78,7 +78,7 @@ export default function Members() {
     if (!confirm("Tem certeza que deseja remover este membro?")) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/delete/${id}`, {
+      const response = await fetch(`https://elohim-oyeu.onrender.com/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

@@ -90,7 +90,7 @@ export default function EditMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3000/busca", {
+        const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
           credentials: "include",
         });
 
@@ -178,7 +178,7 @@ export default function EditMember() {
 
     try {
       // 3. Atualiza com PUT passando a ID na URL
-      const response = await fetch(`http://localhost:3000/editar/${id}`, {
+      const response = await fetch(`https://elohim-oyeu.onrender.com/editar/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

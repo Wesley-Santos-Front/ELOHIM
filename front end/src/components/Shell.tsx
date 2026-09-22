@@ -18,7 +18,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/logout", {
+      const response = await fetch("https://elohim-oyeu.onrender.com/logout", {
         credentials: "include",
         method: "POST",
       })

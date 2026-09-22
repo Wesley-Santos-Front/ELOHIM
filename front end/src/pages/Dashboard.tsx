@@ -11,7 +11,7 @@ export default function Dashboard() {
   // 1. Busca os membros na API
   const getMemberstot = async () => {
     try {
-      const response = await fetch("http://localhost:3000/busca", {
+      const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
         credentials: "include",
       });
 

@@ -22,7 +22,7 @@ export default function ViewMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3000/busca", {
+        const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
           credentials: "include",
         });
 
