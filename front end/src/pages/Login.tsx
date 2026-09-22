@@ -47,15 +47,13 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json();
-
-        // Salva no estado global do contexto
-        setUserlog(data);
-
-        // Se o backend retornar o token via JSON, salva no localStorage para requisições com Bearer
+        
+        // Guardar o token no localStorage para requisições entre domínios (Vercel -> Render)
         if (data.token) {
           localStorage.setItem("token", data.token);
         }
 
+        setUserlog(data);
         setSucess("Usuário logado com sucesso");
         toast.success("Usuário logado com sucesso");
 
