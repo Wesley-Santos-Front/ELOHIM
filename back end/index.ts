@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "elohim-8iir.vercel.app",
+  origin: "https://elohim-8iir.vercel.app",
   credentials: true,
 }));
 app.use(router);
