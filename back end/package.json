@@ -3,10 +3,10 @@
   "name": "back-end",
   "version": "1.0.0",
   "main": "index.js",
-"scripts": {
-  "dev": "tsx --watch index.ts",
-  "start": "tsx index.ts"
-},
+  "scripts": {
+    "dev": "npx tsx --watch index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,7 +28,6 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "pg": "^8.23.0",
-    "tsx": "^4.23.15"
+    "pg": "^8.23.0"
   }
 }
