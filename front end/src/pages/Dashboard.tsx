@@ -8,17 +8,10 @@ export default function Dashboard() {
   const { userLog } = useContext(UserContext);
   const [memb, setMemb] = useState<membersTypes[]>([]);
 
-  // 1. Busca os membros na API enviando o Token
+  // 1. Busca os membros na API
   const getMemberstot = async () => {
     try {
-      const token = localStorage.getItem("token");
-
       const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` // 👈 ADICIONADO: Envia o token para o authMiddleware
-        },
         credentials: "include",
       });
 
@@ -53,7 +46,7 @@ export default function Dashboard() {
     .sort((a, b) => Number(b.id) - Number(a.id))
     .slice(0, 2);
 
-  // 4. Filtro e Formatação de Aniversariantes do Mês
+  // 4. Filtro e Formatação de Aniversariantes do Mês (Sem alteração por fuso)
   const mesAtual = new Date().getMonth();
 
   const aniversariantesDoMes = memb
