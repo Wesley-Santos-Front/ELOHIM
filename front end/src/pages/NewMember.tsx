@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Shell, PageHeader } from '../components/Shell';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast'; 
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function NewMember() {
   const [error, setError] = useState("");
@@ -118,7 +119,7 @@ export default function NewMember() {
     setSucess("");
 
     try {
-      const response = await fetch("https://elohim-oyeu.onrender.com/cadastro", {
+      const response = await fetch(`${backend}/cadastro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

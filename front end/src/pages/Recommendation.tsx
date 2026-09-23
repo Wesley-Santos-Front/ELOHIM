@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, FormEvent } from 'react';
 import { Shell, PageHeader } from '../components/Shell';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 interface Member {
   id: string | number;
@@ -21,7 +22,7 @@ export default function Recommendation() {
     async function fetchMembers() {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
+        const response = await fetch(`${backend}/busca`, {
           credentials: "include",
         });
 

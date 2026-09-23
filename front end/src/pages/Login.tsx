@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import type { UserInterface } from '../types/User';
 import { UserContext } from '../contexts/UserContext';
 import toast from 'react-hot-toast';
+const backend = import.meta.env.VITE_BACKEND_URL;
+
 
 export default function Login() {
+  
   const navigate = useNavigate();
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +24,7 @@ export default function Login() {
         setError('Preencha os campos de texto acima')
         return;
       }
-      const response = await fetch("https://elohim-oyeu.onrender.com/login", {
+      const response = await fetch(`${backend}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, password }),

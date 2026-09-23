@@ -3,6 +3,7 @@ import { PageHeader, Shell } from '../components/Shell';
 import { UserContext } from '../contexts/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { membersTypes } from '../types/Member';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function Dashboard() {
   const { userLog } = useContext(UserContext);
@@ -11,7 +12,7 @@ export default function Dashboard() {
   // 1. Busca os membros na API
   const getMemberstot = async () => {
     try {
-      const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
+      const response = await fetch(`${backend}/busca`, {
         credentials: "include",
       });
 

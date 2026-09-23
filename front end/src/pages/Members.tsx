@@ -3,6 +3,7 @@ import { Shell, PageHeader } from '../components/Shell';
 import { MembersTable } from '../components/MembersTable';
 import { membersTypes } from '../types/Member';
 import toast from 'react-hot-toast';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function Members() {
   const [members, setMembers] = useState<membersTypes[]>([]);
@@ -27,7 +28,7 @@ export default function Members() {
   const getMembers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
+      const response = await fetch(`${backend}/busca`, {
         credentials: "include"
       });
       
@@ -78,7 +79,7 @@ export default function Members() {
     if (!confirm("Tem certeza que deseja remover este membro?")) return;
 
     try {
-      const response = await fetch(`https://elohim-oyeu.onrender.com/delete/${id}`, {
+      const response = await fetch(`${backend}/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

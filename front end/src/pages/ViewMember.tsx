@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Shell, PageHeader } from '../components/Shell';
 import toast from 'react-hot-toast';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function ViewMember() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function ViewMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
+        const response = await fetch(`${backend}/busca`, {
           credentials: "include",
         });
 

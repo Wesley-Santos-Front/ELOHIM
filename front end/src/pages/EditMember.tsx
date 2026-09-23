@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect } from 'react';
 import { Shell, PageHeader } from '../components/Shell';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast'; 
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function EditMember() {
   const { id } = useParams(); // 1. Resgata o id da URL (/editar-membro/:id)
@@ -90,7 +91,7 @@ export default function EditMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-oyeu.onrender.com/busca", {
+        const response = await fetch(`${backend}/busca`, {
           credentials: "include",
         });
 
@@ -178,7 +179,7 @@ export default function EditMember() {
 
     try {
       // 3. Atualiza com PUT passando a ID na URL
-      const response = await fetch(`https://elohim-oyeu.onrender.com/editar/${id}`, {
+      const response = await fetch(`${backend}/editar/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

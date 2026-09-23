@@ -1,6 +1,7 @@
 import { Shell, PageHeader } from '../components/Shell';
 import { membersTypes } from '../types/Member';
 import { useState, useEffect } from 'react';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 export default function Birthdays() { 
   const [memb, setMemb] = useState<membersTypes[]>([]);
@@ -8,7 +9,7 @@ export default function Birthdays() {
   // 1. Busca os membros na API
   const getMebersBirt = async () => {
     try {
-      const response = await fetch("http://localhost:3000/busca", {
+      const response = await fetch(`${backend}/busca`, {
         credentials: "include",
       });
 
