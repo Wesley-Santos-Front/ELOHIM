@@ -3,6 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+const backend = import.meta.env.VITE_BACKEND_URL;
 
 const links = [
   ['Painel', '/painel'],
@@ -18,7 +19,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("https://elohim-oyeu.onrender.com/logout", {
+      const response = await fetch(`${backend}/logout`, {
         credentials: "include",
         method: "POST",
       })
