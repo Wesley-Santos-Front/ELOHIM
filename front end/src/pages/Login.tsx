@@ -3,19 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import type { UserInterface } from '../types/User';
 import { UserContext } from '../contexts/UserContext';
 import toast from 'react-hot-toast';
-const backend = import.meta.env.VITE_BACKEND_URL;
 
+// Garante que não haja barra no final da URL para evitar redirecionamentos (que quebram o CORS)
+const rawBackend = import.meta.env.VITE_BACKEND_URL || '';
+const backend = rawBackend.endsWith('/') ? rawBackend.slice(0, -1) : rawBackend;
 
 export default function Login() {
-  
   const navigate = useNavigate();
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [sucess, setSucess] = useState("");
   const { setUserlog } = useContext(UserContext);
-
-  console.log(document.cookie);
 
   async function submit(event: FormEvent) {
     event.preventDefault()
@@ -24,12 +23,17 @@ export default function Login() {
         setError('Preencha os campos de texto acima')
         return;
       }
-      const response = await fetch(`${backend}/login`, {
+
+      // Garante que a URL seja exatamente sem barras duplas
+      const targetUrl = `${backend}/login`;
+
+      const response = await fetch(targetUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, password }),
         credentials: "include",
       });
+
       if (response.status === 404) {
         setError("Usuário e/ou senha não encontrado");
         return;
@@ -48,6 +52,7 @@ export default function Login() {
       }
     } catch (error) {
       console.log(error);
+      setError("Erro de conexão com o servidor. Tente novamente.");
       return;
     }
   }
@@ -56,7 +61,6 @@ export default function Login() {
     <div className="login">
       <form className="login-box" onSubmit={submit} noValidate>
         <div className="login-brand">
-          {/* Imagem do ícone no lugar do span com 'E' */}
           <div className="brand-mark-container">
             <img 
               src="/icon-elohim.png" 
