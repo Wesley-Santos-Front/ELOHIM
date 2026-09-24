@@ -5,15 +5,13 @@ import { router } from "./src/routes.js";
 
 const app = express();
 
-// 1. Configuração do CORS
 const allowedOrigins = [
-  "https://elohim-8iir.vercel.app",
-  "http://localhost:5173"
+  "https://elohim-8iir.vercel.app"
 ];
 
+// Configuração principal de CORS
 app.use(cors({
   origin: (origin, callback) => {
-    // Permite chamadas da lista ou sem origin (ferramentas/mobile)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -21,17 +19,20 @@ app.use(cors({
     }
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
 }));
 
-// 2. Middleware de Fallback para responder HTTP 200/204 para qualquer preflight OPTIONS
+// Interceptor genérico para requisições Preflight (OPTIONS)
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Origin", req.headers.origin || "https://elohim-8iir.vercel.app");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.includes(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+      res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    }
     return res.sendStatus(204);
   }
   next();
