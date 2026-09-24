@@ -47,8 +47,12 @@ export const auth = async (req: Request, res: Response) =>{
   const {usuario} = req;
   res.status(200).json(usuario);
   }catch(error){
-    res.status(500).json({message: "Erro no servidor, tente novamente mais tarde!"});
-    return;
+   console.error("ERRO NO LOGIN:", error);
+
+    res.status(500).json({
+        message: "Erro no servidor",
+        error: error instanceof Error ? error.message : String(error)
+    });
   }
 }
 
