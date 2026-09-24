@@ -5,15 +5,14 @@ import { router } from "./src/routes.js";
 
 const app = express();
 
-// 1. Configurar Origens Permitidas
 const allowedOrigins = [
   "https://elohim-8iir.vercel.app",
   "http://localhost:5173"
 ];
 
-const corsOptions: cors.CorsOptions = {
+// 1. O próprio middleware de CORS já trata as requisições OPTIONS nativamente
+app.use(cors({
   origin: (origin, callback) => {
-    // Permite chamadas sem origin (como requisições mobile ou ferramentas de API) ou que estejam na lista
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -22,23 +21,14 @@ const corsOptions: cors.CorsOptions = {
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
-};
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
-// 2. Aplicar o CORS como PRIMEIRO middleware
-app.use(cors(corsOptions));
-
-// 3. Responder imediatamente às requisições Preflight (OPTIONS)
-app.options("*", cors(corsOptions));
-
-// 4. Demais middlewares
 app.use(express.json());
 app.use(cookieParser());
-
-// 5. Rotas
 app.use(router);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando com sucesso na porta ${PORT}`);
+  console.log(`Servidor a rodar na porta ${PORT}`);
 });
