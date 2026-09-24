@@ -6,29 +6,17 @@ import { router } from "./src/routes.js";
 
 const app = express();
 
-const allowedOrigins = [
-    "https://elohim-8iir.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:8080"
-];
-
-app.use(cors({
-    origin: function (origin, callback) {
-        // Permite requisições sem Origin, como algumas ferramentas/API clients
-        if (!origin) {
-            return callback(null, true);
-        }
-
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-
-        return callback(new Error("Origem não permitida pelo CORS"));
-    },
+const corsOptions = {
+    origin: "https://elohim-8iir.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
-}));
+};
+
+app.use(cors(corsOptions));
+
+// Responde explicitamente ao preflight
+app.options(/.*/, cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
