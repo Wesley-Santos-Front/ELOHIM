@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "https://elohim-8iir.vercel.app",
+  origin: "https://elohim-8iir-git-main-wesleys-projects-c31d114f.vercel.app",
   credentials: true,
 }));
 app.use(router);
