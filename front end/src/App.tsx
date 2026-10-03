@@ -17,7 +17,7 @@ export default function App() {
   
 
 const handleAuthUser = async () =>{
-  const response = await fetch("http://localhost:3000/me", {
+  const response = await fetch("https://elohim-sogr.onrender.com/me", {
     credentials: "include",
   });
   if(response.status !== 200){

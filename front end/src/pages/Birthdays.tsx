@@ -8,7 +8,7 @@ export default function Birthdays() {
   // 1. Busca os membros na API
   const getMebersBirt = async () => {
     try {
-      const response = await fetch("http://localhost:3000/busca", {
+      const response = await fetch("https://elohim-sogr.onrender.com/busca", {
         credentials: "include",
       });
 
