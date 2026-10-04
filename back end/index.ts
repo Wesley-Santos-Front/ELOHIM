@@ -5,6 +5,10 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+// OBRIGATÓRIO PARA O RENDER:
+// Informa o Express que ele está atrás de um proxy reverso HTTPS
+app.set("trust proxy", 1);
+
 // Lista com todas as URLs da Vercel e ambiente local
 const allowedOrigins = [
   "https://elohim-8iir.vercel.app",
@@ -36,6 +40,9 @@ app.use(
 
 app.use(router);
 
-app.listen(3000, () => {
-  console.log("Servidor funcionando");
+// Usa a porta fornecida pelo Render em produção ou 3000 localmente
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
