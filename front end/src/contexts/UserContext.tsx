@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
 import type { UserContextType } from "../types/User";
+import { useNavigate } from "react-router-dom";
 
 // Dica: Adicione 'loading?: boolean' na sua interface UserContextType no arquivo types/User.ts
 export const UserContext = createContext<any>({
@@ -9,6 +10,7 @@ export const UserContext = createContext<any>({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const navigate = useNavigate();
   const [userLog, setUserlog] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +25,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         if (response.ok) {
           const data = await response.json();
           setUserlog(data);
+          navigate("/painel");
+          
         } else {
           setUserlog(null);
         }
