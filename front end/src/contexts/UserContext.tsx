@@ -1,6 +1,9 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
 import type { UserContextType } from "../types/User";
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 // Dica: Adicione 'loading?: boolean' na sua interface UserContextType no arquivo types/User.ts
 export const UserContext = createContext<any>({
@@ -16,7 +19,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const response = await fetch("https://elohim-sogr.onrender.com/me", {
+        const response = await fetch(`${API_URL}/me`, {
           method: "GET",
           credentials: "include", // Permite o envio dos cookies do Render
         });

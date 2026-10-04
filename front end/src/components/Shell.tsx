@@ -4,6 +4,9 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 const links = [
   ['Painel', '/painel'],
   ['Membros', '/membros'],
@@ -18,7 +21,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("https://elohim-sogr.onrender.com/logout", {
+      const response = await fetch(`${API_URL}/logout`, {
         credentials: "include",
         method: "POST",
       })

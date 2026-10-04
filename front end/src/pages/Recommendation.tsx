@@ -1,6 +1,9 @@
 import { useState, useEffect, useMemo, FormEvent } from 'react';
 import { Shell, PageHeader } from '../components/Shell';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 interface Member {
   id: string | number;
   nome: string;
@@ -21,7 +24,7 @@ export default function Recommendation() {
     async function fetchMembers() {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+        const response = await fetch(`${API_URL}/busca`, {
           credentials: "include",
         });
 

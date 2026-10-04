@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Shell, PageHeader } from '../components/Shell';
 import toast from 'react-hot-toast';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function ViewMember() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ export default function ViewMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+        const response = await fetch(`${API_URL}/busca`, {
           credentials: "include",
         });
 

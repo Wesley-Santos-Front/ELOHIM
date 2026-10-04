@@ -3,6 +3,9 @@ import { Shell, PageHeader } from '../components/Shell';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast'; 
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function NewMember() {
   const [error, setError] = useState("");
   const [sucess, setSucess] = useState("");
@@ -118,7 +121,7 @@ export default function NewMember() {
     setSucess("");
 
     try {
-      const response = await fetch("https://elohim-sogr.onrender.com/cadastro", {
+      const response = await fetch(`${API_URL}/cadastro`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -4,6 +4,9 @@ import type { UserInterface } from '../types/User';
 import { UserContext } from '../contexts/UserContext';
 import toast from 'react-hot-toast';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Login() {
   const navigate = useNavigate();
   const [user, setUser] = useState('')
@@ -21,7 +24,7 @@ export default function Login() {
         setError('Preencha os campos de texto acima')
         return;
       }
-      const response = await fetch("https://elohim-sogr.onrender.com/login", {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, password }),

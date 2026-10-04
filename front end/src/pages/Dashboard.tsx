@@ -4,6 +4,9 @@ import { UserContext } from '../contexts/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { membersTypes } from '../types/Member';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Dashboard() {
   const { userLog } = useContext(UserContext);
   const [memb, setMemb] = useState<membersTypes[]>([]);
@@ -11,7 +14,7 @@ export default function Dashboard() {
   // 1. Busca os membros na API
   const getMemberstot = async () => {
     try {
-      const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+      const response = await fetch(`${API_URL}/busca`, {
         credentials: "include",
       });
 

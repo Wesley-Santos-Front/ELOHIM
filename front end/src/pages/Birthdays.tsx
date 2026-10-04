@@ -2,13 +2,16 @@ import { Shell, PageHeader } from '../components/Shell';
 import { membersTypes } from '../types/Member';
 import { useState, useEffect } from 'react';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Birthdays() { 
   const [memb, setMemb] = useState<membersTypes[]>([]);
 
   // 1. Busca os membros na API
   const getMebersBirt = async () => {
     try {
-      const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+      const response = await fetch(`${API_URL}/busca`, {
         credentials: "include",
       });
 

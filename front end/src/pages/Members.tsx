@@ -4,6 +4,9 @@ import { MembersTable } from '../components/MembersTable';
 import { membersTypes } from '../types/Member';
 import toast from 'react-hot-toast';
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Members() {
   const [members, setMembers] = useState<membersTypes[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +30,7 @@ export default function Members() {
   const getMembers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+      const response = await fetch(`${API_URL}/busca`, {
         credentials: "include"
       });
       
@@ -78,7 +81,7 @@ export default function Members() {
     if (!confirm("Tem certeza que deseja remover este membro?")) return;
 
     try {
-      const response = await fetch(`https://elohim-sogr.onrender.com/delete/${id}`, {
+      const response = await fetch(`${API_URL}/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });

@@ -3,6 +3,9 @@ import { Shell, PageHeader } from '../components/Shell';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast'; 
 
+// Lê a variável do ambiente do Vite ou usa a URL base como fallback
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function EditMember() {
   const { id } = useParams(); // 1. Resgata o id da URL (/editar-membro/:id)
   const navigate = useNavigate();
@@ -90,7 +93,7 @@ export default function EditMember() {
     const fetchMemberData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("https://elohim-sogr.onrender.com/busca", {
+        const response = await fetch(`${API_URL}/busca`, {
           credentials: "include",
         });
 
@@ -178,7 +181,7 @@ export default function EditMember() {
 
     try {
       // 3. Atualiza com PUT passando a ID na URL
-      const response = await fetch(`https://elohim-sogr.onrender.com/editar/${id}`, {
+      const response = await fetch(`${API_URL}/editar/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
