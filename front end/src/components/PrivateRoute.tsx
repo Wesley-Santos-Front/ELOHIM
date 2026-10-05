@@ -1,11 +1,11 @@
 import { useContext, type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext"; // Ajuste a pasta se necessário
+import { UserContext } from "../contexts/UserContext";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { userLog, loading } = useContext(UserContext);
 
-  // 1. Enquanto o UserContext estiver a consultar a rota /me no Render, exibe o ecrã de carregamento
+  // 1. Enquanto estiver a consultar a rota /me no Render, exibe o ecrã de carregamento
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#0f0f12] text-white">
@@ -17,9 +17,9 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  // 2. Se a validação terminou e não existe utilizador autenticado, redireciona para o Login
+  // 2. Se a validação terminou e não existe utilizador autenticado, redireciona direto para o Login
   if (!userLog) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // 3. Utilizador autenticado com sucesso

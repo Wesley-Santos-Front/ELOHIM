@@ -1,39 +1,17 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, type ReactNode } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
-const PublicRoute = ({children} : {children: ReactNode}) => {
-  const [isChecking, setIschecking] = useState(true);
-  const navigate = useNavigate();
+const PublicRoute = ({ children }: { children: ReactNode }) => {
+  const { userLog } = useContext(UserContext);
 
-  useEffect (() =>{
-    const cookie = document.cookie;
-
-    if(cookie){
-      const cookies = cookie.split("; ");
-      const usuarioCookie = cookies.find((c) => c.startsWith("usuario="));
-
-      if(usuarioCookie){
-        navigate("/painel", {replace: true});
-        return;
-      }
-    }
-    setIschecking(false);
-  }, [navigate]);
-  if(isChecking){
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#0f0f12] text-white">
-        {/* Spinner Animado */}
-        <div className="w-10 h-10 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
-        
-        {/* Texto elegante */}
-        <p className="mt-4 text-sm font-medium tracking-widest uppercase text-zinc-400 animate-pulse">
-          Verificando acesso...
-        </p>
-      </div>
-      );
-
+  // Se o usuário já está autenticado no contexto, redireciona para o painel
+  if (userLog) {
+    return <Navigate to="/painel" replace />;
   }
 
-  return <div>{children}</div>
-}
+  // Se não estiver logado, libera o acesso à página de Login
+  return <>{children}</>;
+};
+
 export default PublicRoute;
