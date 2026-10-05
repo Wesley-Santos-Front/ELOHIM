@@ -105,7 +105,7 @@ export default function Recommendation() {
                 required 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
-                placeholder="Ex.: Graziela Nunes de Castro"
+                placeholder="Digite o nome completo"
               />
             </div>
 
@@ -116,7 +116,7 @@ export default function Recommendation() {
                 required 
                 value={role} 
                 onChange={(e) => setRole(e.target.value)} 
-                placeholder="Ex.: Diácono"
+                placeholder="Digite o cargo eclesiástico"
               />
             </div>
 
@@ -136,7 +136,7 @@ export default function Recommendation() {
                 id="pastor" 
                 value={pastor} 
                 onChange={(e) => setPastor(e.target.value)} 
-                placeholder="Ex.: Pr. Roberto Souza" 
+                placeholder="Ex.: Pr. Ivan" 
               />
             </div>
 
