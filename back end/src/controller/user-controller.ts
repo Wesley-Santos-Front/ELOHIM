@@ -70,3 +70,12 @@ export const logout = async (req: Request, res: Response) => {
 
   res.json({ message: "Usuário deslogado" });
 };
+
+//função ping
+export const ping = async (req:Request, res: Response) => {
+  return res.status(200).json({
+    status: "ok",
+    message: "pong",
+    timestamp: new Date().toISOString(),
+  });
+}
